@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>宏任务微任务</title>
+</head>
+<body>
+  
+</body>
+<script>
+  setTimeout(()=>{
+    console.log("timeout1 1");
+  },0)
+  setTimeout(() => {
+    Promise.resolve(2).then(
+      value =>{
+        console.log("timeout2 P ",value);
+      }
+    )
+    console.log("timeout2 3");
+  }, 0);
+  Promise.resolve(4).then(
+    value =>{
+      console.log("timeout2 P ",value);
+    }
+  )
+</script>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>event</title>
+</head>
+<body>
+  <div id="demo">
+    <div @click="test1(123, $event)">test1</div>
+  </div>
+</body>
+
+<script src="./vue.js"></script>
+<script>
+var vm = new Vue({
+  el:'#demo',
+  data:{
+
+  },
+  methods:{
+    test1(num, event){
+      console.log(num);
+      console.log(event);
+    }
+  }
+})
+</script>
+</html>

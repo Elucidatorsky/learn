@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>bindClass</title>
+</head>
+<body>
+  <div id="demo">
+    <h2>
+      <p class="aClass" :class="a">字符串重合</p>
+      <p :class="['bClass', 'aClass']">数组重合</p>
+      <p :class="{aClass:isA, bClass:isB}">对象重合</p>
+    </h2>
+  </div>
+
+</body>
+
+  <script src="./vue.js"></script>
+  <script>
+  var vm = new Vue({
+    el:'#demo',
+    data:{
+      a: 'bClass',
+      isA: true,
+      isB: true,
+    }
+  })
+</script>
+
+<style>
+
+  .bClass{
+    color: blue;
+  }  
+  .aClass{
+    color: red;
+  }
+</style>
+</html>

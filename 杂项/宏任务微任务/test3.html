@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>test3</title>
+</head>
+<body>
+  
+</body>
+<script>
+  setTimeout(() => {
+    console.log(0);
+  }, 0);
+  new Promise((resolve, reject) => {
+    console.log(1);
+    resolve()
+  }).then(
+    console.log(9),
+    () => {
+      console.log(2);
+      new Promise((resolve, reject) => {
+        console.log(3);
+        resolve()
+      }).then(() => {
+        console.log(4);
+      }).then(()=>{
+        console.log(5);
+      })
+    }
+  ).then(() => {
+    console.log(6);
+  })
+
+  new Promise((resolve, reject) =>{
+    console.log(7);
+    resolve()
+  }).then(() => {
+    console.log(8);
+  })
+
+  // 1 7 2 3 8 4 6 5 0
+  /*  out: 1 7 ()↓ 8 ↓ 0
+      同：1 resolve成功↓ 7 resolve成功↓ 完全结束，out微
+      宏：0
+      微：       ()             8
+        (): out: 2 3 ↑ 4()↓ 6 ↓ ↑
+            同：2 3 resolve成功↓ 无返回成功↓ ()结束↑ 完全结束，out微 
+            微：       4()           6
+          4():out: 4 ↑ 5 ↑
+              同：4 无返回成功↓ 4结束↑ 完全结束，out微
+              微：      5
+  */
+  // （插入输出9）： 1 9 7 8 6 0 // Promise只接受一次状态改变
+  /*  out: 1 9 7 8 ↓ 0
+      同：1 resolve成功↓ 9 结束 7 resolve成功↓ 完全结束，out微
+      宏：0
+      微：      空                     8
+        空：out: ↑ 6
+            同：无返回成功↓ 结束↑ 完全结束，out微
+            微：    6
+      
+  */
+</script>
+</html>

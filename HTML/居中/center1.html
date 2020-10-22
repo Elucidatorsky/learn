@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+<div id="parent">
+    <img id="son" src="./AyanamiRockChibi.png" alt="">
+  
+</div>  
+</body>
+<style>
+*{
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+#parent{
+  background-color: blue;
+  height: 350px;
+  line-height: 350px;  /*行高的值与height相等*/
+  text-align: center;
+  font-size: 0;   /*消除幽灵空白节点的bug*/
+}
+#son{
+  background-color: red;
+  /* display: inline-block; */
+  vertical-align: middle;
+}
+</style>
+</html>

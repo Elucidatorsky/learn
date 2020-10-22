@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="parent">
+    <div id="left">左列定宽</div>
+    <div id="right">右列自适应</div>
+</div>
+
+</body>
+<style>
+#parent{
+    width: 100%;
+    display: table;
+    height: 500px;
+}
+#left {
+    width: 100px;
+    background-color: #f00;
+}
+#right {
+    background-color: #0f0;
+}
+#left,#right{
+    display: table-cell;  /*利用单元格自动分配宽度*/
+}
+
+</style>  
+</html>

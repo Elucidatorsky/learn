@@ -1,0 +1,13 @@
+// var b = new Array();
+// b.constructor === Array;
+// b.__proto__ === Array.prototype;
+// var c = new Date();
+// c.constructor === Date; 
+// c.__proto__ === Date.prototype; 
+// var d = new Function(); 
+// d.constructor === Function; 
+// d.__proto__ === Function.prototype;
+// console.log(b.constructor === Array);
+// console.log(Array.prototype.constructor === Array);
+// console.log(Array.prototype == b);
+// console.log(b.__proto__ === Array.prototype);
