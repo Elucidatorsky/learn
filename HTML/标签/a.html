@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!--[new] download: 指定链接下载图片/文件 -->
+  <div>download: 指定链接下载图片/文件</div>
+  <a href="./AyanamiRockChibi.png" download="./AyanamiRockChibi.png">
+    <img src="./AyanamiRockChibi.png" alt="">
+    点击图片下载 
+  </a>
+  <hr>
+  <!--[new] media: 规定目标 URL 是为什么类型的媒介/设备进行优化 为特殊设备（比如 iPhone）、语音或打印媒介设计的 -->
+  <!-- rel: 告诉搜索引擎当前文档与被链接文档的关系。搜索引擎可以利用该属性获得更多有关链接的信息。 -->
+  <!-- target：规定在何处打开链接文档 -->
+  <ul>target：规定在何处打开链接文档
+    <li>_blank 在新窗口中打开被链接文档 会有安全问题：使用rel="noopener noreferrer",防止window.openner滥用</li>
+    <li>_self	默认。在相同的框架中打开被链接文档</li>
+    <li>_parent	在父框架集中打开被链接文档。</li>
+    <li>_top	在整个窗口中打开被链接文档</li>
+    <li>framename	在指定的框架中打开被链接文档</li>
+  </ul>
+  <a href="./a.html" target="_blank">新窗口打开当前页面</a>
+  <hr>
+</body>
+</html>

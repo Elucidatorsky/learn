@@ -1,0 +1,13 @@
+<script>
+  // 利用异步的方式来达到休眠的效果
+  function sleep(t){
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve()
+      },t);
+    })
+  }
+  await sleep(1000)
+
+  // 怎么实现暂停几秒? 同步执行
+</script>

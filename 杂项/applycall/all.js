@@ -5,6 +5,7 @@
 // 所以最后调用 call 的时候执行的函数是目标函数，也就是调用了 bind 的函数，
 // 传入的 this 也是 bind 调用时传入的，这些都是无法被修改的了，
 // 但是参数是调用 bind 和 call 时的叠加，这是我们唯一可以修改的地方。
+// 后续bind改变的this是bind内部函数的this
 Function.prototype.imitateApply = function (context) {
   // 赋值作用域参数，如果没有则默认为 window，即访问全局作用域对象
   context = context || window
