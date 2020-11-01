@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form>
+    fieldset:
+    <fieldset>
+      <legend>legend:</legend>
+      Name: <input type="text" size="30"><br>
+      Email: <input type="text" size="30"><br>
+      Date of birth: <input type="text" size="10"><br><br>
+      label绑定radio: <br>
+      <label for="male">Male</label>
+      <input type="radio" name="sex" id="male" value="male"><br>
+      <label for="female">Female</label>
+      <input type="radio" name="sex" id="female" value="female"><br><br>
+      datalist: <br>
+      <input list="browsers"><br>
+      <datalist id="browsers">
+        <option value="Internet Explorer">
+        <option value="Firefox">
+        <option value="Chrome">
+        <option value="Opera">
+        <option value="Safari">
+      </datalist><br>
+    </fieldset>
+  </form>
+  output
+    <form oninput="x.value=parseInt(a.value)+parseInt(b.value)">0
+      <input type="range" id="a" value="50">100
+      +<input type="number" id="b" value="50">
+      =<output name="x" for="a b"></output>
+    </form>
+</body>
+</html>

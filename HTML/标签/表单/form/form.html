@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>form</title>
+</head>
+<body>
+  <!-- action	URL	规定当提交表单时向何处发送表单数据。 -->
+  <!-- autocomplete [New]	on/off	输入过的内容会有提示 -->
+  <form action="../input/input.html" method="post" autocomplete="on">
+    POST<br>
+    First name: <input type="text" name="FirstName" value="Mickey"><br>
+    Last name: <input type="text" name="LastName" value="Mouse"><br>
+    <input type="submit" value="提交">
+  </form>
+  <form action="../input/input.html" method="get" autocomplete="off">
+    get<br>
+    First name: <input type="text" name="FirstName" value="Mickey"><br>
+    Last name: <input type="text" name="LastName" value="Mouse"><br>
+    <input type="submit" value="提交">
+  </form>
+  <form action="../input/input.html" novalidate>
+    不验证输入内容<br>
+    E-mail: <input type="email" name="user_email">
+    <input type="submit">
+  </form>
+</body>
+</html>
