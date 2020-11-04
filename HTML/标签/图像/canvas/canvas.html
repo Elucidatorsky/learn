@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <p>图片应用:</p>
+  <img src="./AyanamiRockChibis.png" id="lamp">
+  <p>画布:</p>
+  <button onclick="draw('repeat')">重复</button> 
+  <button onclick="draw('repeat-x')">重复-x</button> 
+  <button onclick="draw('repeat-y')">重复-y</button> 
+  <button onclick="draw('no-repeat')">不重复</button>
+  <button onclick="scaleRect()">放大</button>
+  <button onclick="rotateRect()">旋转</button>
+  <button onclick="translateRect()">移动</button>
+  <button onclick="clearAll()">清空</button>
+  <br>
+  <canvas id="myCanvas" width="1000" height="400" style="border:1px solid #d3d3d3;">
+    您的浏览器不支持 HTML5 canvas 标签。</canvas>
+  
+</body>
+    <script>
+    var c=document.getElementById("myCanvas");
+    var ctx=c.getContext("2d");
+    // 裁剪
+    //剪切一个矩形区域clip()方法从原始画布中剪切任意形状和尺寸。
+    // 提示：一旦剪切了某个区域，则所有之后的绘图都会被限制在被剪切的区域内（不能访问画布上的其他区域）
+    // 您也可以在使用 clip() 方法前通过使用 save() 方法对当前画布区域进行保存
+    // 并在以后的任意时间对其进行恢复（通过 restore() 方法）
+      // ctx.rect(20,20,1000,700);
+      // ctx.stroke();
+      // ctx.clip();
+    // fillStyle 属性设置或返回用于填充绘画的颜色、渐变或模式
+    // 颜色
+    ctx.fillStyle="#FF0000";
+    // 阴影模糊级别
+    ctx.shadowBlur=20;
+    // 阴影颜色
+    ctx.shadowColor="black";
+    // 阴影水平移动距离
+    ctx.shadowOffsetX=8;
+    // 阴影垂直移动距离
+    ctx.shadowOffsetY=8;
+    // 绘制"已填充"矩形x0 y0 width higth
+    ctx.fillRect(10,10,100,50);
+    // 绘制矩形(无填充)
+    ctx.strokeRect(340,10,100,50)
+
+    // 线性渐变x0 y0 到 x0 y0
+    var grd=ctx.createLinearGradient(120,0,210,0);
+    // 规定渐变对象中的颜色和停止位置
+    grd.addColorStop(0,"black");
+    grd.addColorStop(0.5,"red");
+    grd.addColorStop(1,"green");
+    // 渐变
+    ctx.fillStyle=grd;
+    ctx.fillRect(120,10,100,50);
+    
+    // 线条宽度
+    ctx.lineWidth="2";
+    // 设置笔触颜色渐变或模式
+    ctx.strokeStyle="blue"
+
+    
+    ctx.font="17px Arial";
+    // 带填充文本
+    ctx.fillText("图像绘制区域",230,10+30);
+    ctx.rect(230,10,100,50);
+    // 绘制已定义的路径
+    ctx.stroke();
+    
+    function draw(direction)
+    {
+      // 清空
+      ctx.clearRect(230,10,100,50); 
+      var img=document.getElementById("lamp")
+      // 在指定的方向上重复指定的元素
+      // 固定从ctx坐标0，0处开始绘制，norepeat和repeat-x和repeat-y同理
+      // 可以更改ctx坐标进行绘制
+      // 创建矩形 x y width higth
+      ctx.rect(230,10,100,50);
+      // 绘制已定义的路径
+      ctx.stroke();
+      ctx.translate(230,10)
+      var pat=ctx.createPattern(img,direction);
+      // 图像模式 
+      ctx.fillStyle=pat;
+      // 填充当前绘图
+      ctx.fill();
+      ctx.translate(-230,-10)
+    }
+
+    // 以左上角为中心 即ctx的坐标
+    // 可以更改ctx坐标进行旋转等操作再改回去绘制
+    function scaleRect() {
+      ctx.lineWidth=3
+      ctx.strokeRect(10,10,100,50);
+      ctx.scale(2,2);
+    }
+
+    // 以左上角为中心 即ctx的坐标
+    function rotateRect(){
+      ctx.rotate(20*Math.PI/180);
+      ctx.fillRect(10,10,100,50);
+    }
+
+    function translateRect() {
+      ctx.translate(70,70);
+      ctx.fillRect(10,10,100,50);
+    }
+    
+    function clearAll(){
+      ctx.clearRect(0,0,c.width,c.height)
+    }
+
+    // 创建放射状/环形的渐变（用在画布内容上）
+    // x0	渐变的开始圆的 x 坐标
+    // y0	渐变的开始圆的 y 坐标
+    // r0	开始圆的半径
+    // x1	渐变的结束圆的 x 坐标
+    // y1	渐变的结束圆的 y 坐标
+    // r1	结束圆的半径
+    var grd1=ctx.createRadialGradient(450,10,30,550,60,30);
+    grd1.addColorStop(0,"red");
+    grd1.addColorStop(1,"skyblue");
+    ctx.fillStyle=grd1;
+    ctx.fillRect(450,10,100,50);
+    
+    // 线
+    // 起始一条路径，或重置当前路径。
+    ctx.beginPath();
+    ctx.lineWidth=8;
+    // butt	默认。向线条的每个末端添加平直的边缘
+    ctx.lineCap="butt";
+    // miter	默认。创建尖角。
+    ctx.lineJoin="miter";
+    // 把路径移动到画布中的指定点，不创建线条
+    ctx.moveTo(560,10);
+    // 添加一个新点，然后在画布中创建从该点到最后指定点的线条
+    ctx.lineTo(570,50);
+    ctx.lineTo(580,10);
+    ctx.stroke();
+    
+    ctx.beginPath();
+    // round	向线条的每个末端添加圆形线帽 
+    ctx.lineCap="round";
+    // round	创建圆角。
+    ctx.lineJoin="round";
+    ctx.moveTo(600,10);
+    ctx.lineTo(610,50);
+    ctx.lineTo(620,10);
+    ctx.stroke();
+    
+    ctx.beginPath();
+    // square	向线条的每个末端添加正方形线帽
+    ctx.lineCap="square";
+    // bevel	创建斜角。
+    ctx.lineJoin="bevel"
+    ctx.moveTo(640,10);
+    ctx.lineTo(650,50);
+    ctx.lineTo(660,10);
+    ctx.stroke();
+    
+    // 斜接长度(尖角到内尖角的长度) 小于斜接长度则尖角 反之斜角
+    ctx.beginPath();
+    ctx.lineJoin="miter";
+    ctx.miterLimit=5;
+    ctx.moveTo(680,10);
+    ctx.lineTo(690,50);
+    ctx.lineTo(700,10);
+    // fill 填充当前绘图
+    // 注意：如果路径未关闭，fill() 方法会默认闭合填充
+    ctx.fillStyle="red"
+    ctx.fill()
+    ctx.stroke();
+    
+    ctx.beginPath();
+    ctx.lineJoin="miter";
+    ctx.miterLimit=3;
+    ctx.moveTo(720,10);
+    ctx.lineTo(730,50);
+    ctx.lineTo(740,10);
+    // closePath() 方法创建从当前点到开始点的路径。
+    ctx.closePath();
+    ctx.stroke();
+    
+    ctx.beginPath();
+    ctx.moveTo(760,10);
+    // quadraticCurveTo() 方法通过使用表示二次贝塞尔曲线的指定控制点
+    // cpx 贝塞尔控制点的 x 坐标   ⚪      ⚪(x,y)
+    // cpy 贝塞尔控制点的 y 坐标。
+    // x 结束点的 x 坐标。         ⚪(cpx,cpy)
+    // y 结束点的 y 坐标。
+    ctx.quadraticCurveTo(760,50,860,10);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(880,10);
+    // 前两点为控制点 后为结束点
+    ctx.bezierCurveTo(910,100,940,-50,980,50);
+    ctx.stroke();
+
+    // arc() 方法创建弧/曲线（用于创建圆或部分圆）
+    ctx.beginPath();
+    // x y r 起始角s(以弧度计) 结束角e(以弧度计) true/false(逆时针/顺时针【默认】绘图)
+    // 起始角（点）默认正右方
+    ctx.arc(40,100,20,0,0.5*Math.PI,true);
+    ctx.stroke();
+
+    // arcTo() 创建介于两个切线之间的弧/曲线 
+    ctx.moveTo(90,80);           // 创建起始点
+    ctx.lineTo(120,80);          // 创建水平线 
+    // x1	两切线交点的横坐标。
+    // y1	两切线交点的纵坐标。
+    // x2	第二条切线上一点的横坐标。
+    // y2	第二条切线上一点的纵坐标。
+    // r	弧的半径。
+    ctx.arcTo(140,80,140,100,20); // 创建弧
+    ctx.lineTo(140,120);         // 创建垂直线
+    ctx.stroke();                // 画出来
+
+    // 如果指定的点位于当前路径中，isPointInPath() 方法返回 true，否则返回 false
+
+    // transform() setTransform()
+    // 注意：transform()每次都会在前一个变换矩阵上构建
+    //  setTransform()每次重置变换矩阵再构建
+    // a水平缩放 b水平倾斜 c垂直倾斜 d垂直缩放 e水平移动 f垂直移动
+    // 水平倾斜（正数：顺时针） —— -> \   垂直倾斜（正数：逆时针） | -> \
+    ctx.transform(1,0,0.5,1,0,0);
+    ctx.fillStyle="red";
+    ctx.fillRect(140,70,100,50);
+    ctx.transform(1,0,-0.5,1,0,0); // 调回原来位置
+    
+    ctx.font="30px Arial";
+    // 带填充文本
+    ctx.fillText("Hello English",310,70+30);
+    
+    ctx.font="30px Arial";
+    ctx.lineWidth = "0.5"
+    // 无填充文本
+    ctx.strokeText("Hello English",310,120+30);
+
+    // measureText()方法返回一个对象，该对象包含以像素计的指定字体宽度
+
+    // textAlign 属性根据锚点，设置或返回文本内容的当前对齐方式
+    // start	默认。文本在指定的位置开始。
+    // end	文本在指定的位置结束。
+    // center	文本的中心被放置在指定的位置。
+    // left	文本在指定的位置开始。
+    // right	文本在指定的位置结束。
+    ctx.strokeStyle="blue";
+    ctx.moveTo(120,150);
+    ctx.lineTo(120,250);
+    ctx.stroke();
+    ctx.font="15px Arial";
+    // Show the different textAlign values
+    ctx.textAlign="start";
+    ctx.fillText("textAlign=start",120,160);
+    ctx.textAlign="end";
+    ctx.fillText("textAlign=end",120,180);
+    ctx.textAlign="left";
+    ctx.fillText("textAlign=left",120,200);
+    ctx.textAlign="center";
+    ctx.fillText("textAlign=center",120,220);
+    ctx.textAlign="right";
+    ctx.fillText("textAlign=right",120,240);
+
+    //Draw a blue line at y=100
+    ctx.strokeStyle="blue";
+    ctx.moveTo(500,100);
+    ctx.lineTo(990,100);
+    ctx.stroke();
+    ctx.font="20px Arial"
+    //Place each word at y=100 with different textBaseline values
+    ctx.textBaseline="top";
+    ctx.fillText("Top",670,100);
+    ctx.textBaseline="bottom";
+    ctx.fillText("Bottom",730,100);
+    ctx.textBaseline="middle";
+    ctx.fillText("Middle",800,100);
+    ctx.fillText("textBaseline=\"\"",630,100);
+    ctx.textBaseline="alphabetic";
+    ctx.fillText("Alphabetic",910,100);
+    ctx.textBaseline="hanging";
+    ctx.fillText("Hanging",990,100)
+    
+    // img	规定要使用的图像、画布或视频。	 
+    // sx	可选。开始剪切的 x 坐标位置。
+    // sy	可选。开始剪切的 y 坐标位置。
+    // swidth	可选。被剪切图像的宽度。
+    // sheight	可选。被剪切图像的高度。
+    // x	在画布上放置图像的 x 坐标位置。
+    // y	在画布上放置图像的 y 坐标位置。
+    // width	可选。要使用的图像的宽度（伸展或缩小图像）。
+    // height	可选。要使用的图像的高度（伸展或缩小图像）。
+    var can=c;
+    setTimeout(()=>{
+        ctx.drawImage(can,20,20,400,200,600,160,200,100);
+    },1000)
+
+    // 创建新的、空白的 ImageData 对象。
+    // getImageData() 返回 ImageData 对象
+    var imgData=ctx.createImageData(100,100);
+    for (var i=0;i<imgData.data.length;i+=4)
+    {
+      imgData.data[i+0]=255;
+      imgData.data[i+1]=0;
+      imgData.data[i+2]=0;
+      imgData.data[i+3]=255;
+    }
+    console.log(imgData.data)
+    // 把图像数据（从指定的 ImageData 对象）放回画布上
+    ctx.putImageData(imgData,230,160);
+
+    // .globalAlpha	设置或返回绘图的当前 alpha 或透明值
+    </script>
+</html>

@@ -45,13 +45,9 @@
   <fieldset>	定义围绕表单中元素的边框。
   <legend>	定义 fieldset 元素的标题。
   <datalist>New	规定了 input 元素可能的选项列表。
-  <keygen>New	规定用于表单的密钥对生成器字段。
   <output>New	定义一个计算的结果
 
-# 框架	 
-  <frame>	HTML5不再支持。 定义框架集的窗口或框架。
-  <frameset>	HTML5不再支持。定义框架集。
-  <noframes>	HTML5不再支持。 定义针对不支持框架的用户的替代内容。
+# 框架
   <iframe>	定义内联框架。
 
 # 图像	 
