@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>时钟</title>
+	</head>
+	<body>
+		<canvas id="clock" width="400" height="400" style="background-color: black;"></canvas>
+    </body>
+    <script type="text/javascript">
+        var can = document.getElementById("clock");
+        var ctx = can.getContext("2d");
+        var width = ctx.canvas.width;
+        var height = ctx.canvas.height;
+        var r = width / 2;
+        var img = new Image();
+        var hour, minute, second;
+        img.src = "./01.jpg";
+        ctx.save();
+        ctx.translate(r, r);
+        ctx.beginPath();
+        ctx.arc(0, 0, r - 5, 0, 2 * Math.PI, true);
+        ctx.clip();
+        img.onload = function() {
+            ctx.drawImage(img, -223, -223, 446, 446);
+            drawClockPie();
+            drawClockMins(); 
+            drawClockHours(); 
+            getTimes(); 
+            drawText();
+            drawHourPin();
+            drawMinPin();
+            drawsecPin();
+        }
+        ctx.closePath();
+        //绘制表盘
+        function drawClockPie() {
+            ctx.beginPath();
+            ctx.lineWidth = 8;
+            ctx.strokeStyle = 'skyblue';
+            ctx.arc(0, 0, r - 5, 0, 2 * Math.PI);
+            ctx.stroke();
+            ctx.closePath();
+        }
+        //绘制时刻度
+        function drawClockHours() {
+            for (var i = 0, l = 12; i < 12; i++) {
+                ctx.save();
+                ctx.translate(0, 0);
+                ctx.rotate(i * 1 / 12 * 2 * Math.PI);
+                ctx.beginPath();
+                ctx.lineWidth = 5;
+                ctx.strokeStyle = 'blue';
+                ctx.moveTo(0, -191);
+                ctx.lineTo(0, -175);
+                ctx.stroke();
+                ctx.closePath();
+                ctx.restore();
+            }
+        }
+        //绘制分刻度
+        function drawClockMins() {
+            for (var i = 0, l = 60; i < 60; i++) {
+                ctx.save();
+                ctx.translate(0, 0);
+                ctx.rotate(i * 1 / 60 * 2 * Math.PI);
+                ctx.beginPath();
+                ctx.lineWidth = 4;
+                ctx.strokeStyle = 'yellow';
+                ctx.moveTo(0, -191);
+                ctx.lineTo(0, -183);
+                ctx.stroke();
+                ctx.closePath();
+                ctx.restore();
+            }
+        }
+        // 绘制时针
+        function drawHourPin(){
+            ctx.save();
+            ctx.translate(0,0);
+            ctx.rotate((hour*60*60 + minute*60 + second)/(12 * 60 * 60)*2*Math.PI);
+            ctx.beginPath();
+            ctx.strokeStyle = 'orange';
+            ctx.lineWidth = 7;
+            ctx.moveTo(0,0);
+            ctx.lineTo(0,-140);
+            ctx.stroke();
+            ctx.closePath();
+            ctx.restore();
+        }
+         //绘制分针
+         function drawMinPin(){
+             ctx.save();
+             ctx.translate(0,0);
+             ctx.rotate((minute*60 + second)/(60*60)*2*Math.PI);
+             ctx.beginPath();
+             ctx.strokeStyle = 'purple';
+             ctx.lineWidth = 4;
+             ctx.moveTo(0,0);
+             ctx.lineTo(0,-145);
+             ctx.stroke();
+             ctx.closePath();
+             ctx.restore();
+         }
+         // 绘制秒针
+         function drawsecPin(){
+             ctx.save();
+             ctx.translate(0,0);
+             ctx.rotate(second/60*2*Math.PI);
+             ctx.beginPath();
+             ctx.strokeStyle = 'red';
+             ctx.lineWidth = 2;
+             ctx.moveTo(5,0);
+             ctx.arc(0, 0, 5, 0, 2 * Math.PI,false);
+             ctx.moveTo(0,-5);
+             ctx.lineTo(0,-145);
+             ctx.arc(0, -150, 5,1/2 * Math.PI, 5/2 * Math.PI,false);
+             ctx.fillStyle='white';
+             ctx.fill();
+             ctx.moveTo(0,-155);
+             ctx.lineTo(0,-165);
+             ctx.stroke();
+             ctx.closePath();
+             ctx.restore();
+         }
+        // 绘制时间
+        function drawText() {
+            if(minute>=0 && minute <=9){
+                var time = hour + ':0' + minute;
+            }
+            else{
+                var time = hour + ':' + minute;
+            }
+            ctx.font = '20px 宋体';
+            ctx.fillStyle = "red";
+            ctx.fillText(time, -25, 140);
+        }
+        // 获取时间
+        function getTimes() {
+            var date = new Date();
+            hour = date.getHours();
+            minute = date.getMinutes();
+            second = date.getSeconds();
+        }
+        //每隔一秒更新时间
+        setInterval(function() {
+            ctx.clearRect(-200, -200, 400, 400);
+            ctx.drawImage(img, -223, -223, 446, 446);
+            drawClockPie();
+            drawClockMins();
+            drawClockHours();
+            getTimes();
+            drawText();
+            drawHourPin();
+            drawMinPin();
+            drawsecPin();
+        }, 1000);
+    </script>
+</html>
