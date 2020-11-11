@@ -1,0 +1,44 @@
+<script>
+  // console.log(foo); undefined 变量提升 先声明var foo 再输出 再赋值
+  // var foo = 1
+
+  // console.log(bar); 引用参数错误ReferenceError 变量不会提升
+  // let bar = 2
+
+  // 暂时性死区
+  // 变量先访问内部,没有再访问外部 内部检测到变量 但未声明就赋值 报错
+  // 直接写会默认var声明
+  var tmp = 123;
+  {
+    tmp = 'abc'
+    let tmp
+  }
+  // 隐蔽死区
+  function bar(x=y,y=2){}
+  // 报错 先x=y再y=2 y未被声明就赋值给x
+  let x =x 
+  // 报错 在变量x的声明语句还没有执行完成前，就去取x的值
+  
+  // let不允许重复声明
+
+  // 函数无论是否通过会被声明 声明会造成变量提升
+  // 不通过var声明 通过let声明(es6内) 在浏览器中为了兼容性问题不遵守es6规定,通过也是var声明
+  // 变量不通过不声明
+  // 变量通过若不加var且不赋值默认let
+  // 变量通过赋值默认var
+  // 因为环境导致的差异过大 一般不在块级作用域内声明函数,优先使用函数表达式 即变量
+//   let f = 1
+// function a(){
+//   console.log('a outside');
+// }
+// !function () {
+//   if(true){
+//     f = 2
+//     function a() {
+//       console.log('a inside');
+//     }
+//   }
+//   console.log(f);
+//   a()
+// }();
+</script>

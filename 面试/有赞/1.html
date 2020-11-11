@@ -1,0 +1,10 @@
+<script>
+  for(let i=0;i<5;i++){
+    return;
+  }
+  [1,2,3].map((_,i) => {
+    // 把后面的语句中止掉 不是中止for循环 是中止这个if函数体
+    if(i==1) return // 无法退出
+  })
+  
+</script>

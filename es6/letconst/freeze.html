@@ -1,0 +1,14 @@
+<script>
+  var a = Object.freeze(1)
+  // 冻结后无法改变
+  // 但在复合属性中无法冻结内部对象
+  // 彻底冻结对象
+  var constantize = (obj) => {
+  Object.freeze(obj);
+  Object.keys(obj).forEach( (key, i) => {
+    if ( typeof obj[key] === 'object' ) {
+      constantize( obj[key] );
+    }
+  });
+};
+</script>

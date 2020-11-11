@@ -1,0 +1,33 @@
+<script>
+// for in是遍历对象的
+// for of是遍历可迭代对象的(实现了es6迭代器协议的对象)
+// 可迭代对象 array string map set
+let obj = {
+  a: 1,
+  b: 2,
+  // Symbol 实现一个不重复的 唯一的变量
+  [Symbol.iterator] : ()=>{
+    // es6 generate
+    let keys = Object.keys(obj)
+    return {
+      next(){
+        for (let i = 0; i < keys.length; i++) {
+          if(i===keys.length-1){
+            return {
+              down: true,
+              value: obj[keys[i]]
+            }
+          }
+          return {
+            down: false,
+            value: obj[keys[i]]
+          }
+        }
+      }
+    }
+  }
+}
+for(let item of obj){
+
+}
+</script>

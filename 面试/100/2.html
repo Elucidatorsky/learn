@@ -1,0 +1,15 @@
+<script>
+  [1,2,3].map((item, i) => {
+    return parseInt(item, i)
+  })
+  // parseInt 2-36进制转换为 10 进制
+  parseInt(1,0) // 0即不传参 10进制 转换1
+  parseInt(2,1) // 1进制 没有 NaN
+  parseInt(3,2) // 2进制的3转换 没有 NaN
+  parseInt(012) // 若劝着为 0x 则被认为是16进制
+
+  [1,2,3].map((i)=>{
+    return i
+  })
+  // map返回的是数组
+</script>

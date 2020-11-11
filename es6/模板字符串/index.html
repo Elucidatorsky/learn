@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="main"></div>
+</body>
+<script>
+  basket = {
+    count: 2,
+    onSale: '3$'
+  }
+  $('#main').append(`
+    There are <b>${basket.count}</b> items
+    in your basket, <em>${basket.onSale}</em>
+    are on sale!
+  `);
+  // 字符串中嵌入变量
+  // let name = "Bob", time = "today";
+  // `Hello ${name}, how are you ${time}`
+
+  // ... 叫 1.剩余参数 fn(...res)
+  // 叫 2.扩展运算符  ...'123'
+</script>
+</html>

@@ -1,0 +1,36 @@
+<script>
+  // 解构可以取到继承的属性 对象解构可以指定默认值
+  let [a,[b],...c] = [1,[2,3],4,5,6]
+  let {e} = {f:'12'} // 解构失败 返回undefined
+  let {h:val} = {h:'1', val:'2'}
+  // h undefined  val: 1
+  
+  // 用途
+  // 1 交换变量
+  let x = 1 ,y = 2
+  [x,y]=[y,x]
+  // 2 从函数返回多个值
+  function example() {
+    return [1, 2, 3];
+  }
+  let [a, b, c] = example();
+  function example() {
+    return {
+      foo: 1,
+      bar: 2
+    };
+  }
+  let { foo, bar } = example();
+  // 3 定义函数参数
+  function fn(...arg) {}
+  // 4 提取对象数据
+  // 5 遍历Map
+  const map = new Map();
+  map.set('first', 'hello');
+  map.set('second', 'world');
+
+  for (let [key, value] of map) {
+    console.log(key + " is " + value);
+  }
+  // 获取模块的指定方法（部分引入）
+</script>

@@ -1,0 +1,31 @@
+<script>
+  let p = (t) => {
+    return new Promise((resolve,reject) => {
+      setTimeout(() => {
+        resolve(t)
+      }, t);
+    })
+  }
+  // reject resolve 生成Promise立即 失败 成功
+  let p3 = Promise.reject('defeat')
+  let p4 = Promise.resolve('victory')
+  let arr = [p(1000),p(2000),p3]
+  console.time('a')
+  // all等待所有promise完成 race等待最先完成
+  // 接收一个数组
+  Promise.all(arr).then(r=>{
+    console.timeEnd('a')
+    console.log(r)
+  })
+  console.time('a1');
+  Promise.all(arr).then(r=>{
+    console.timeEnd('a1')
+    console.log(r)
+  })
+  // allSettled 只要有改变认为成功
+  Promise.allSettled(arr).then((r)=>{
+    console.log(r);
+  })
+  // 任意有成功成功
+  Promise.any(arr).then((r)=>console.log(r))
+</script>
