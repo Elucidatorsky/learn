@@ -1,0 +1,74 @@
+<script>
+  // 正则表达式方法
+  var str = "Kawakaze"
+  // 1.compile() 用于改变和重新编译正则表达式
+  var regCom1 = /a/g
+  str.replace(regCom1,'b') // Kbwbkbze
+  str.replace(regCom1.compile(/ka/g),'b') // Kawabze
+  // 2.exec() 不匹配返回null 匹配返回一个数组 
+  // 使用全局匹配时每次匹配会移动到被匹配的字符串后再匹配
+  var r = ''
+  var num = 0
+  while(r = regCom1.exec(str)&&num<5){
+    console.log(r);
+    num++
+  }
+  // 若全部对应 则返回数组 第一位是匹配对象 后面分别为括号内匹配对象
+  const RE_DATE = /(\d{4})-(\d{2})-(\d{2})/;
+  const matchObj = RE_DATE.exec('1999-12-31');
+  const year = matchObj[1]; // 1999
+  const month = matchObj[2]; // 12
+  const day = matchObj[3]; // 31
+
+  // 3.test() 不匹配返回false 匹配返回true
+  regCom1.test(str) // true
+
+  // 4.search() 检索指定字符串或能匹配的字符串 匹配返回被匹配字符串首位下标 不匹配返回-1
+  // 不支持 全局匹配 总是从头开始找
+  regCom1.search(str)
+
+  // 5.match() 检索出来的字符串返回一个数组 没有返回null
+  regCom1.match(str)
+
+  var regex = new RegExp('xyz', 'i');
+  var regex = new RegExp(/xyz/i)
+  // 等价于
+  var regex = /xyz/i;
+  // u添加了u修饰符，含义为“Unicode 模式”，用来正确处理大于\uFFFF的 Unicode 字符
+  function codePointLength(text) {
+    var result = text.match(/[\s\S]/gu);
+    return result ? result.length : 0;
+  }
+
+  // var s = '𠮷𠮷';
+
+  // s.length // 4
+  // codePointLength(s) // 2
+
+  // y修饰符的作用与g修饰符类似，也是全局匹配，后一次匹配都从上一次匹配成功的下一个位置开始
+  // var s = 'aaa_aa_a';
+  // var r1 = /a+/g;
+  // var r2 = /a+/y;
+
+  // r1.exec(s) // ["aaa"]
+  // r2.exec(s) // ["aaa"]
+
+  // r1.exec(s) // ["aa"]
+  // r2.exec(s) // null
+
+
+  // 新增方法matchAll()
+  // String.prototype.matchAll()方法，可以一次性取出所有匹配。
+  // 不过，它返回的是一个遍历器（Iterator），而不是数组
+  const string = 'test1test2test3';
+  const regex = /t(e)(st(\d?))/g;
+
+  for (const match of string.matchAll(regex)) {
+    console.log(match);
+  }
+  // 转为数组的方法一
+  [...string.matchAll(regex)]
+
+  // 转为数组的方法二
+  Array.from(string.matchAll(regex))
+</script>

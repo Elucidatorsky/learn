@@ -2,5 +2,26 @@
   // includes()：返回布尔值，表示是否找到了参数字符串。
   // startsWith()：返回布尔值，表示参数字符串是否在原字符串的头部。
   // endsWith()：返回布尔值，表示参数字符串是否在原字符串的尾部。
-  
+  let str = 'Ayanami desu'
+  str.includes('deso',3) // 从第三个字符开始
+  str.startsWith('mi',5) // 从第五个字符开始
+  str.endsWith('nami',6) // 前6个字符
+
+  // repeat(n) 返回一个字符串，重复n次 小数向下取整 负数Infinity报错 NaN等同0
+  'poi'.repeat(3)
+
+  // padStart() padEnd() 补全字符串 超出长度截去补充长度 不够则不变
+  '夕立'.padEnd(7,'poi') // 在末尾补全够7位 夕立poipo
+  // 一般用于提示字符串格式
+  '12'.padStart(10, 'YYYY-MM-DD')
+
+  // trim() trimStart() trimEnd() 删除空格 删除前面空格 删除后面空格
+
+  // matchAll() 返回一个正则表达式在当前字符串的所有匹配
+
+  // replaceAll() 全部替换
+  str.repleace(/a/g,'o') // 相当于
+  str.replaceAll('a','o')
+
+
 </script>

@@ -1,0 +1,22 @@
+<script>
+  // 允许 前缀0x表示进制数
+  0b110010100 === 404
+  0o624 === 404
+  0x194 === 404
+  // Number方法 转换进制数为十进制
+  Number('0x194') // 404
+  // Number.isFinite()检测是否有限数 Number.isNaN()检测是否是NaN
+  // 传统 isFinite() isNaN() 方法会先用Number方法将()内东西转换成数值再判断
+  Number.isFinite(NaN) // false
+  // Number.parseInt() Number.parseFloat() 传统方法移植
+  parseInt('194',16) // 404
+  parseInt('0o624') // 404
+  // Number.isInteger() 判断是否为一个整数
+  // Number.EPSILON() 表示 1 与大于 1 的最小浮点数之间的差
+  // Number.trunc() 去除数的小数部分，会先转换为数值 // .floor() .ceil()
+  // Math.sign() 判断正负数和0 会先转换为数值 // isNaN()
+  // Math.cbrt() 立方根  // Math.pow(Math.abs(), 1/3)
+  // Math.hypot() 返回一个平方和的平方根
+
+  // 指数运算符 ** 从右向左计算
+</script>

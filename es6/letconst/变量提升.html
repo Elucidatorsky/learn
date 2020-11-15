@@ -18,7 +18,32 @@
   // 报错 先x=y再y=2 y未被声明就赋值给x
   let x =x 
   // 报错 在变量x的声明语句还没有执行完成前，就去取x的值
-  
+  let x = 1;
+  function f(y = x) {
+    let x = 2;
+    console.log(y);
+  }
+  // 函数f调用时，参数y = x形成一个单独的作用域。
+  // 这个作用域里面，变量x本身没有定义，所以指向外层的全局变量x
+  f() // 1
+  var x = 1;
+  function foo(x = x) {
+    // ...
+  }
+  // 参数x = x形成一个单独作用域。实际执行的是let x = x
+  foo() // ReferenceError: x is not defined
+  var x = 1;
+  var y = 1
+  function foo(x = y) {
+    // ...
+  }
+  foo() // 正常执行
+  let foo = 'outer';
+  function bar(func = () => foo) {
+    let foo = 'inner';
+    console.log(func());
+  }
+  bar(); // outer
   // let不允许重复声明
 
   // 函数无论是否通过会被声明 声明会造成变量提升

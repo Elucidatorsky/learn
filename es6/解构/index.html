@@ -22,7 +22,8 @@
   }
   let { foo, bar } = example();
   // 3 定义函数参数
-  function fn(...arg) {}
+  function fn({...arg, a=5}={}) {}
+  // 注意： ...是剩余参数（放在函数中） 是扩展运算符 对对象进行展开
   // 4 提取对象数据
   // 5 遍历Map
   const map = new Map();
