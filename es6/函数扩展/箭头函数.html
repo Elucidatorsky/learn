@@ -1,0 +1,64 @@
+<script>
+//   箭头函数有几个使用注意点。
+
+// （1）函数体内的this对象，就是定义时所在的对象(若该对象没有this，则继续向外指向)，而不是使用时所在的对象。
+function foo() {
+  setTimeout(() => {
+    console.log('id:', this.id);
+  }, 100);
+}
+var id = 21;
+foo.call({ id: 42 }); // id: 42
+// 箭头函数可以让setTimeout里面的this，绑定定义时所在的作用域，而不是指向运行时所在的作用域。
+function Timer() {
+  this.s1 = 0;
+  this.s2 = 0;
+  // 箭头函数
+  setInterval(() => this.s1++, 1000);
+  // 普通函数
+  setInterval(function () {
+    this.s2++;
+  }, 1000);
+}
+var timer = new Timer();
+setTimeout(() => console.log('s1: ', timer.s1), 3100);
+setTimeout(() => console.log('s2: ', timer.s2), 3100);
+// s1: 3
+// s2: 0
+
+// （2）不可以当作构造函数，也就是说，不可以使用new命令，否则会抛出一个错误。
+// （3）不可以使用arguments对象，该对象在函数体内不存在。如果要用，可以用 rest 参数代替。
+// （4）不可以使用yield命令，因此箭头函数不能用作 Generator 函数。
+
+// es5实现
+function foo() {
+  setTimeout(() => {
+    console.log('id:', this.id);
+  }, 100);
+}
+
+// ES5
+function foo() {
+  var _this = this;
+
+  setTimeout(function () {
+    console.log('id:', _this.id);
+  }, 100);
+}
+
+// 不适用场合
+// 由于箭头函数使得this从“动态”变成“静态”，下面两个场合不应该使用箭头函数。
+// 定义对象会指向window
+const cat = {
+  lives: 9,
+  jumps: () => {
+    this.lives--;
+  }
+}
+// 第二个场合是需要动态this的时候，也不应使用箭头函数。
+// 因为button的监听函数是一个箭头函数，导致里面的this就是全局对象
+var button = document.getElementById('press');
+button.addEventListener('click', () => {
+  this.classList.toggle('on');
+});
+</script>

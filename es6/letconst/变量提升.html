@@ -18,6 +18,7 @@
   // 报错 先x=y再y=2 y未被声明就赋值给x
   let x =x 
   // 报错 在变量x的声明语句还没有执行完成前，就去取x的值
+
   let x = 1;
   function f(y = x) {
     let x = 2;
@@ -26,44 +27,65 @@
   // 函数f调用时，参数y = x形成一个单独的作用域。
   // 这个作用域里面，变量x本身没有定义，所以指向外层的全局变量x
   f() // 1
+
   var x = 1;
   function foo(x = x) {
     // ...
   }
   // 参数x = x形成一个单独作用域。实际执行的是let x = x
   foo() // ReferenceError: x is not defined
+
   var x = 1;
   var y = 1
   function foo(x = y) {
     // ...
   }
   foo() // 正常执行
+
   let foo = 'outer';
   function bar(func = () => foo) {
     let foo = 'inner';
     console.log(func());
   }
   bar(); // outer
+
+  // 函数内 参数的 变量函数对象内 变量属性指向外部参数（先在内部没有找到x，向外找）
+  var x = 1;
+  function foo(x, y = function() { x = 2; }) {
+    var x = 3;
+    y();
+    console.log(x);
+  }
+  foo() // 3
+  x // 1
+
+  var x = 1;
+  function foo(x, y = function() { x = 2; }) {
+    x = 3;
+    y();
+    console.log(x);
+  }
+  foo() // 2
+  x // 1
+
   // let不允许重复声明
 
-  // 函数无论是否通过会被声明 声明会造成变量提升
+  // 块级作用域内 函数无论是否通过会被声明 声明会造成函数提升
   // 不通过var声明 通过let声明(es6内) 在浏览器中为了兼容性问题不遵守es6规定,通过也是var声明
   // 变量不通过不声明
-  // 变量通过若不加var且不赋值默认let
-  // 变量通过赋值默认var
   // 因为环境导致的差异过大 一般不在块级作用域内声明函数,优先使用函数表达式 即变量
-//   let f = 1
-// function a(){
-//   console.log('a outside');
-// }
-// !function () {
-//   if(true){
-//     f = 2
-//     function a() {
-//       console.log('a inside');
-//     }
-//   }
-//   console.log(f);
-//   a()
-// }();
+  let f = 1
+  function a(){
+    console.log('a outside');
+  }
+  !function () {
+    if(true){
+      f = 2
+      function a() {
+        console.log('a inside');
+      }
+    }
+    console.log(f);
+    a()
+  }();
 </script>
