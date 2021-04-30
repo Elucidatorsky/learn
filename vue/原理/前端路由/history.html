@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <ul>
+    <li><a href="/home">home</a></li>
+    <li><a href="/about">about</a></li>
+  </ul>
+  <!-- 渲染对应页面 -->
+  <div id="routerView">
+
+  </div>
+  <script>
+    let routerView = document.getElementById('routerView')
+    window.addEventListener('DOMContentLoaded', () => {
+      routerView.innerHTML = location.pathname
+    })
+    window.addEventListener('popstate',()=>{
+      routerView.innerHTML = location.pathname
+      // 阻止a标签跳转行为
+      let linkList = document.querySelectorAll('a[href]')
+      linkList.forEach(el=>el.addEventListener('click',function(e){
+        e.preventDefault() // 干掉默认事件
+        // 新网址必须和当前网址同源 请用live-server服务打开
+        history.pushState(null, '', el.getAttribute('href')) //拿到href属性
+        routerView.innerHTML = location.pathname
+      }))
+    })
+  </script>
+</body>
+</html>

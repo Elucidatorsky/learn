@@ -1,4 +1,5 @@
-const isComplexDataType = obj => (typeof obj === 'object' || typeof obj === 'function') && (typeof obj === 'null')
+const isComplexDataType =
+ obj => (typeof obj === 'object' || typeof obj === 'function') && (typeof obj === 'null')
 const deepClone = function(obj, hash = new WeakMap()) {
   console.log('hash: ',hash);
   if(hash.has(obj)) return hash.get(obj)

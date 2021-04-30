@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 前面带上个#号就是hash数据了 -->
+  <ul>
+    <li><a href="#/home">home</a></li>
+    <li><a href="#/about">about</a></li>
+  </ul>
+  <!-- 渲染对应页面 -->
+  <div id="routeView">
+
+  </div>
+  <script>
+    // 检测url是否被拼接上hash字段
+    let routerView = document.getElementById('routerView')
+    window.addEventListener('hashchange', ()=>{
+      let hash = location.hash
+      routerView.innerHTML = hash
+    }) // 一刷新就没了，所以要再次监听hash值
+    // 页面初次刷新要监听hash值: DOM元素初次被渲染完成
+    window.addEventListener('DOMContentLoaded',()=>{
+      if(!location.hash){ // 首页，重定向到根目录
+        location.hash = '/'
+      }
+      let hash = location.hash
+      routerView.innerHTML = hash // 你想加载的页面
+    })
+  </script>
+</body>
+</html>
